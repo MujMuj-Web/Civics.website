@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Justice Forward | Civics Social Action</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1d1d1f;
+      --muted: #5f6368;
+      --line: #e8e8ea;
+      --soft: #f6f7f9;
+      --accent: #c81d25;
+      --accent-dark: #a8161d;
+      --card: #ffffff;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .topbar-inner, .nav-inner, .hero-inner, .section-inner, .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .topbar-inner {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .topbar a { color: var(--accent); font-weight: 700; }
+    .contact-row { display: flex; gap: 18px; flex-wrap: wrap; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #ef5b63);
+      color: white;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 18px rgba(200, 29, 37, 0.28);
+      font-size: 20px;
+    }
+    .brand span { font-size: 20px; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav a {
+      color: #2d2d2d;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .donate-btn {
+      background: var(--accent);
+      color: white !important;
+      padding: 11px 18px;
+      border-radius: 999px;
+      box-shadow: 0 10px 22px rgba(200, 29, 37, 0.22);
+    }
+    .donate-btn:hover { background: var(--accent-dark); }
+
+    .hero {
+      padding: 52px 0 26px;
+      background:
+        radial-gradient(circle at top left, rgba(200,29,37,0.10), transparent 33%),
+        linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      line-height: 0.98;
+      margin: 0 0 18px;
+      max-width: 11ch;
+    }
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 58ch;
+      margin-bottom: 24px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      background: white;
+    }
+    .button.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .button.primary:hover { background: var(--accent-dark); }
+    .button:hover { transform: translateY(-1px); }
+
+    .hero-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero-card .image {
+      min-height: 280px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.35)),
+        url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=80') center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 22px;
+      color: white;
+    }
+    .hero-card .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .hero-card h2 { margin: 0 0 8px; font-size: 1.4rem; }
+    .hero-card p { margin: 0; color: rgba(255,255,255,0.92); }
+
+    .news-strip {
+      margin-top: 24px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .news-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .news-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .news-item {
+      padding: 18px 20px;
+      border-right: 1px solid var(--line);
+    }
+    .news-item:last-child { border-right: 0; }
+    .news-date {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .news-item h3 { margin: 0; font-size: 1.02rem; }
+
+    .section {
+      padding: 72px 0;
+    }
+    .section.alt { background: var(--soft); }
+    .section-title {
+      margin-bottom: 24px;
+    }
+    .section-title h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin: 0 0 10px;
+      line-height: 1.05;
+    }
+    .section-title p { color: var(--muted); max-width: 70ch; margin: 0; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      padding: 22px;
+    }
+    .card .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: rgba(200,29,37,0.08);
+      color: var(--accent);
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 1.2rem; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .panel h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.4rem; }
+    .panel p, .panel li { color: var(--muted); }
+    .panel ul { margin: 10px 0 0 20px; }
+
+    .map-box {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #f4f5f7;
+    }
+    .map-image {
+      min-height: 340px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.22)),
+        url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/BlankMap-World.svg/1280px-BlankMap-World.svg.png') center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+      color: white;
+    }
+    .map-image strong { display: block; font-size: 1.1rem; }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+    .timeline-item {
+      border-left: 4px solid var(--accent);
+      padding: 4px 0 4px 16px;
+    }
+    .timeline-item h4 { margin: 0 0 6px; }
+    .timeline-item p { margin: 0; color: var(--muted); }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .goal {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    }
+    .goal h3 { margin-top: 0; }
+    .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0 0; }
+    .pill {
+      background: #f3f3f4;
+      color: #404040;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .event-banner {
+      background: linear-gradient(135deg, var(--accent), #ef5b63);
+      color: white;
+      border-radius: 30px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .event-banner h2 { margin: 0 0 10px; }
+    .event-banner p { margin: 0; color: rgba(255,255,255,0.92); }
+    .event-box {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 24px;
+      padding: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .sources ol {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--muted);
+    }
+    .sources li { margin-bottom: 10px; }
+
+    footer {
+      padding: 34px 0 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      background: #fff;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .two-col, .cards, .goal-grid, .event-banner, .news-list { grid-template-columns: 1fr; }
+      nav ul { gap: 14px; }
+      .news-item { border-right: 0; border-bottom: 1px solid var(--line); }
+      .news-item:last-child { border-bottom: 0; }
+      h1 { max-width: 100%; }
+    }
+    @media (max-width: 700px) {
+      .nav-inner { flex-direction: column; align-items: flex-start; padding-top: 14px; padding-bottom: 14px; }
+      nav ul { justify-content: flex-start; }
+      .topbar-inner { flex-direction: column; align-items: flex-start; padding-top: 8px; padding-bottom: 8px; }
+      .section { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div>English | Français</div>
+      <div class="contact-row">
+        <span>Justice Forward Social Action Group</span>
+        <a href="#sources">Sources</a>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="nav-inner">
+      <a class="brand" href="#home" aria-label="Justice Forward home">
+        <div class="brand-mark">J</div>
+        <span>Justice Forward</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#issue">The Issue</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#action">Action</a></li>
+          <li><a href="#event">Event</a></li>
+          <li><a class="donate-btn" href="#funding">Donate</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Civics Social Action Project</div>
+            <h1>Build fair systems. Create lasting peace.</h1>
+            <p class="lead">
+              Justice Forward is a student-led organization focused on peace, justice, and strong institutions.
+              We educate our school community, raise awareness, and support real action for fairness and human rights.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#issue">Explore the issue</a>
+              <a class="button" href="#action">See our goals</a>
+            </div>
+            <p style="margin:0;color:var(--muted);max-width:62ch;">
+              Inspired by the clean, civic-focused style of CIVIX: simple navigation, bold headings, a news section,
+              and clear calls to action.
+            </p>
+          </div>
+
+          <div class="hero-card">
+            <div class="image">
+              <div>
+                <div class="tag">Youth. Justice. Democracy.</div>
+                <h2>Student voices matter</h2>
+                <p>Strong institutions help people feel safe, heard, and protected.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="news-strip" aria-label="News highlights">
+          <div class="news-head">
+            <span>News & Updates</span>
+            <a href="#sources" style="color:var(--accent);">View sources</a>
+          </div>
+          <div class="news-list">
+            <article class="news-item">
+              <div class="news-date">Update 1</div>
+              <h3>Students learn how weak institutions affect everyday life.</h3>
+            </article>
+            <article class="news-item">
+              <div class="news-date">Update 2</div>
+              <h3>Our team plans a campus awareness campaign and fundraiser.</h3>
+            </article>
+            <article class="news-item">
+              <div class="news-date">Update 3</div>
+              <h3>Community action can support human rights and fairness worldwide.</h3>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>Our philosophy</h2>
+          <p>
+            Every person deserves fairness, safety, and equal access to justice. Strong institutions are necessary
+            for peace, democracy, and human rights.
+          </p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div class="icon">⚖</div>
+            <h3>Fairness</h3>
+            <p>We believe laws and systems should treat people equally and protect basic rights.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🛡</div>
+            <h3>Protection</h3>
+            <p>People should feel safe from corruption, discrimination, and abuse of power.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📣</div>
+            <h3>Awareness</h3>
+            <p>Educating students is one of the first steps toward long-term change.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="issue">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>The problem</h2>
+          <p>
+            Many countries struggle with weak peace, justice, and strong institutions. This leads to corruption,
+            unfair laws, political instability, and limited access to justice. The following summary is based on your
+            planner content.
+          </p>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <h3>What is happening?</h3>
+            <p>
+              Weak or corrupt governments, poverty, conflict, and inequality can damage courts, police systems, and
+              public trust. In some places, people cannot rely on their leaders or legal systems to protect them.
+            </p>
+            <p>
+              This causes human rights violations, unfair treatment, and cycles of instability that can last for years.
+            </p>
+            <h3>Who is affected?</h3>
+            <ul>
+              <li>People living in war zones</li>
+              <li>Minority groups facing discrimination</li>
+              <li>Journalists and human rights activists</li>
+              <li>Families who cannot access fair courts</li>
+              <li>Countries affected by refugees and instability</li>
+            </ul>
+          </div>
+
+          <div class="map-box">
+            <div class="map-image" style="background:none; padding:0;">
+              <img src="Screenshot 2026-04-12 23.09.49.png" alt="Global peace and stability map" style="width:100%; height:auto; display:block;">
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>Impact on Canada and the world</h2>
+          <p>
+            This issue matters beyond one country. It can affect migration, public services, trade, security, and the
+            health of democracy everywhere.
+          </p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div class="icon">🌍</div>
+            <h3>Global instability</h3>
+            <p>Weak institutions can make conflict worse and make international cooperation harder.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🏠</div>
+            <h3>Canadian communities</h3>
+            <p>Refugees and migration affect population growth, public services, and how communities respond.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🤝</div>
+            <h3>Why students should care</h3>
+            <p>Fairness, equality, and trust in institutions are important in Canada too.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="action">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>What is already being done</h2>
+          <p>
+            The United Nations, Amnesty International, and Transparency International all work on peace, human rights,
+            and anti-corruption. Their work has helped raise awareness, but the problem is still serious.
+          </p>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <h3>What we will do</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <h4>Goal 1: Awareness</h4>
+                <p>Reach at least 500 students with presentations, announcements, posters, and social media.</p>
+              </div>
+              <div class="timeline-item">
+                <h4>Goal 2: Fundraising</h4>
+                <p>Raise $500 over 2 years through school events and donation drives.</p>
+              </div>
+              <div class="timeline-item">
+                <h4>How success is measured</h4>
+                <p>Track attendance, engagement, money raised, and event participation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="funding">
+            <h3>Funding sources</h3>
+            <p>Two realistic ways our organization could receive funding:</p>
+            <ul>
+              <li>School fundraisers such as snack sales, basketball tournaments, intramurals, or donation drives</li>
+              <li>A GoFundMe or online donation campaign to support education and human rights organizations</li>
+            </ul>
+            <p>
+              Funds would support workshops, awareness materials, and organizations that protect human rights and fight
+              corruption.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="event">
+      <div class="section-inner">
+        <div class="event-banner">
+          <div>
+            <div class="eyebrow" style="color:rgba(255,255,255,0.92);">Grassroots event</div>
+            <h2>Peace & Justice Fair</h2>
+            <p>
+              Saturday, October 17, 2026 at our school gym. There will be info booths, guest speakers, games, and food.
+              Entry is $5 or donate what you can. All money goes toward our goals.
+            </p>
+          </div>
+          <div class="event-box">
+            <h3 style="margin-top:0;">Event details</h3>
+            <p style="margin-bottom:10px;">A simple, high-energy event that raises awareness and funds at the same time.</p>
+            <div class="pill-row">
+              <span class="pill">Info booths</span>
+              <span class="pill">Guest speakers</span>
+              <span class="pill">Games</span>
+              <span class="pill">Food</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="sources">
+      <div class="section-inner sources">
+        <div class="section-title">
+          <h2>Chicago style sources</h2>
+          <p>These are the sources you listed in your planner.</p>
+        </div>
+        <div class="panel">
+          <ol>
+            <li>United Nations. “Goal 16: Peace, Justice and Strong Institutions.” United Nations Sustainable Development, accessed April 12, 2026.</li>
+            <li>Amnesty International. “Human Rights.” Amnesty International, accessed April 12, 2026.</li>
+            <li>Transparency International. “Corruption Perceptions Index.” Transparency International, accessed April 12, 2026.</li>
+            <li>Clapp, Angelina. “SDG: Peace, Justice and Strong Institutions.” The Democracy Docket, March 23, 2021.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong style="color:var(--text);">Justice Forward</strong><br>
+        Build fair systems, create lasting peace.
+      </div>
+      <div>Grade 10 Civics Social Action Website</div>
+    </div>
+  </footer>
+</body>
+</html>
